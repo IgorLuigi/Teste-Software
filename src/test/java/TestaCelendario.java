@@ -45,12 +45,81 @@ public class TestaCelendario {
         String obtido = saidaConsole.toString();
         assertEquals(janeiro2022.replaceAll("\\s+", ""), obtido.replaceAll("\\s+", ""));
     }
-
-//    @Test
-//    public void testarAnoNaoInteiro() throws IOException {
-//        Throwable excecao = assertThrows(NumberFormatException.class,
-//                () -> Calendario.mostrarCalendario("@"));
+    
+    @Test
+    public void testarUmParametroN„oInteiro() throws IOException {
+    	//Path arquivo = Paths.get("src\\test\\resources", "janeiro2022.txt");
+    	//String janeiro2022 = Files.readString(arquivo); //saida esperada
+    	//Calendario.mostrarCalendario("2021");
+    	//String obtido = saidaConsole.toString();
+    	//assertEquals(janeiro2022.replaceAll("\\s+", ""), obtido.replaceAll("\\s+", ""));
+    	
+    	Throwable excecao = assertThrows(NumberFormatException.class,
+    			() -> Calendario.mostrarCalendario("1,5"));
+    	
+    	assertEquals("mostrarCalendario: 1,5: ano invalido.", excecao.getMessage());
+    }
+    
+    
+    
+    @Test 
+    public void testarAnoMenorQueUm() throws IOException { 
+    	//Path arquivo = Paths.get("src\\test\\resources", "janeiro2022.txt"); 
+    	//String janeiro2022 = Files.readString(arquivo); //saida esperada
+    	//Calendario.mostrarCalendario("1"); 
+    	//String obtido = saidaConsole.toString();
+    	//assertEquals(janeiro2022.replaceAll("\\s+", ""), obtido.replaceAll("\\s+","")); 
+    	
+    	Throwable excecao = assertThrows(NumberFormatException.class,
+    			() -> Calendario.mostrarCalendario("-1"));
+    	assertEquals("mostrarCalendario: -1: ano inv·lido.", excecao.getMessage());
+    }
+   
+    @Test 
+    public void testarAnoMaiorQue9999() throws IOException {
+//    	Path arquivo = Paths.get("src\\test\\resources", "janeiro2022.txt"); 
+//    	String janeiro2022 = Files.readString(arquivo); //saida esperada
+//    	Calendario.mostrarCalendario("9999"); 
+//    	String obtido = saidaConsole.toString();
+//    	assertEquals(janeiro2022.replaceAll("\\s+", ""), obtido.replaceAll("\\s+","")); 
+    	
+    	Throwable excecao = assertThrows(NumberFormatException.class,
+    			() -> Calendario.mostrarCalendario("10000"));
+    	assertEquals("mostrarCalendario: 10000: ano inv·lido.", excecao.getMessage());
+    }
+    
+    @Test 
+    public void testarAnoMaiorQueMaiorQue1MenorQue9999() throws IOException {
+    	Path arquivo = Paths.get("src\\test\\resources", "janeiro2022.txt"); 
+    	String janeiro2022 = Files.readString(arquivo); //saida esperada
+    	Calendario.mostrarCalendario("9998"); 
+    	String obtido = saidaConsole.toString();
+    	assertEquals(janeiro2022.replaceAll("\\s+", ""), obtido.replaceAll("\\s+","")); 
+    }
+    
+    @Test
+    public void testarMesNaoInteiroAnoN„oInteiro() throws IOException {
+    	Path arquivo = Paths.get("src\\test\\resources", "marÁo2022.txt"); 
+    	String marco2022 = Files.readString(arquivo); //saida esperada
+    	Calendario.mostrarCalendario("3", "2001"); 
+    	String obtido = saidaConsole.toString();
+    	assertEquals(marco2022.replaceAll("\\s+", ""), obtido.replaceAll("\\s+","")); 
+    }
+    
+    @Test
+    public void testarMesNaoInteiroAnoMenorQue1() throws IOException {
+    	
+    }
+    
+    
+//  @Test
+//  public void testarAnoNaoInteiro() throws IOException {
+//      Throwable excecao = assertThrows(NumberFormatException.class,
+//              () -> Calendario.mostrarCalendario("@"));
 //
-//        assertEquals("mostrarCalendario: @: ano inv√°lido.", excecao.getMessage());
-//    }
+//      assertEquals("mostrarCalendario: @: ano inv√°lido.", excecao.getMessage());
+//  }    
+    
+
+
 }
